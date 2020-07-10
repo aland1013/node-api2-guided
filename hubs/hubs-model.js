@@ -10,25 +10,20 @@ module.exports = {
   update,
   findHubMessages,
   findMessageById,
-  addMessage,
+  addMessage
 };
 
 function find(query) {
   const { page = 1, limit = 2, sortby = 'id', sortdir = 'asc' } = query;
   const offset = limit * (page - 1);
 
-  let rows = db('hubs')
-    .orderBy(sortby, sortdir)
-    .limit(limit)
-    .offset(offset);
+  let rows = db('hubs').orderBy(sortby, sortdir).limit(limit).offset(offset);
 
   return rows;
 }
 
 function findById(id) {
-  return db('hubs')
-    .where({ id })
-    .first();
+  return db('hubs').where({ id }).first();
 }
 
 async function add(hub) {
@@ -38,15 +33,11 @@ async function add(hub) {
 }
 
 function remove(id) {
-  return db('hubs')
-    .where({ id })
-    .del();
+  return db('hubs').where({ id }).del();
 }
 
 function update(id, changes) {
-  return db('hubs')
-    .where({ id })
-    .update(changes, '*');
+  return db('hubs').where({ id }).update(changes, '*');
 }
 
 function findHubMessages(hubId) {
@@ -58,9 +49,7 @@ function findHubMessages(hubId) {
 
 // You Do
 function findMessageById(id) {
-  return db('messages')
-    .where({ id })
-    .first();
+  return db('messages').where({ id }).first();
 }
 
 async function addMessage(message) {

@@ -86,6 +86,17 @@ router.put('/:id', (req, res) => {
 });
 
 // add an endpoint that returns all the messages for a hub
+
 // add an endpoint for adding new message to a hub
+router.post('/:id/messages', (req, res) => {
+  const messageInfo = { ...req.body, hub_id: req.params.id };
+  Hubs.addMessage(messageInfo)
+    .then((message) => {
+      res.status(201).json(message);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: 'error adding', err });
+    });
+});
 
 module.exports = router;
